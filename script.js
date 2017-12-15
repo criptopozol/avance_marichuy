@@ -51,6 +51,9 @@ var datapoints = [
     new datapoint("2017/12/14", 98285, 1439),
 ]
 
+document.getElementById("ultimaFecha").innerHTML = datapoints[datapoints.length - 1].fecha;
+document.getElementById("apoyosTotales").innerHTML = datapoints[datapoints.length - 1].apoyos.toLocaleString();
+
 var totalesCtx = document.getElementById("totalesChart");
 var totalesChart = new Chart(totalesCtx, {
     type: 'bar',
