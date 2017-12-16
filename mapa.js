@@ -17,7 +17,8 @@ var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 var osm = new L.TileLayer(osmUrl);
 map.addLayer(osm);
 map.attributionControl.addAttribution('Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors');
-map.attributionControl.addAttribution('Con datos del INE <a href="http://www.ine.mx/reportes-apoyo-ciudadano/">Reportes de Apoyo Ciudadano</a>');
+map.attributionControl.addAttribution('Datos del INE <a href="http://www.ine.mx/reportes-apoyo-ciudadano/">Reportes de Apoyo Ciudadano</a>');
+map.attributionControl.addAttribution('GeoJSON de <a href="https://gist.github.com/ponentesincausa/46d1d9a94ca04a56f93d#file-mexico-json">ponentesincausa</a>');
 
 // control that shows state info on hover
 var info = L.control();
