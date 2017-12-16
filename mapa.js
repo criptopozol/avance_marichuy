@@ -5,6 +5,7 @@ function state_data(nombre, apoyos, porcentaje)
     this.porcentaje = porcentaje;
 }
 
+var state_datas_fecha = "2017-12-11"
 var state_datas = [
     new state_data("Aguascalientes", 1733, 19.05),
     new state_data("Baja California", 1223, 4,64),
@@ -51,15 +52,14 @@ for (state of statesData.features) {
     i += 1;
 }
 
-var mapboxAccessToken = "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw";
-var map = L.map('mapid').setView([19.432608, -99.133209], 4);
+var map = L.map('mapid').setView([23.6260333, -102.5375005], 5);
 
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxAccessToken, {
-    id: 'mapbox.light',
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-	'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-	'Imagery © <a href="http://mapbox.com">Mapbox</a>'
-}).addTo(map);
+// create the tile layer with correct attribution
+var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+var osm = new L.TileLayer(osmUrl);
+map.addLayer(osm);
+map.attributionControl.addAttribution('Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors');
+map.attributionControl.addAttribution('Con datos del INE <a href="http://www.ine.mx/reportes-apoyo-ciudadano/">Reportes de Apoyo Ciudadano</a>');
 
 // control that shows state info on hover
 var info = L.control();
@@ -71,7 +71,7 @@ info.onAdd = function (map) {
 };
 
 info.update = function (props) {
-    this._div.innerHTML = '<h4>Apoyos por Estado</h4>' +
+    this._div.innerHTML = '<h4>Apoyos por Estado al día ' + state_datas_fecha + '</h4>' +
 	(props ?
 	 '<b>' + props.nombre + '</b><br />' +
 	 props.apoyos + ' apoyos'+ '<br />' +
@@ -146,8 +146,6 @@ geojson = L.geoJson(statesData, {
     style: style,
     onEachFeature: onEachFeature
 }).addTo(map);
-
-map.attributionControl.addAttribution('Con datos del INE <a href="http://www.ine.mx/reportes-apoyo-ciudadano/">Reportes de Apoyo Ciudadano</a>');
 
 var legend = L.control({position: 'bottomleft'});
 
