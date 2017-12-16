@@ -1,3 +1,8 @@
+// calculate daily difference
+for (var i = 1; i < apoyos_data.length; i++) {
+    apoyos_data[i].incremento = apoyos_data[i].apoyos - apoyos_data[i-1].apoyos;
+}
+
 document.getElementById("ultimaFecha").innerHTML = apoyos_data[apoyos_data.length - 1].fecha;
 document.getElementById("apoyosTotales").innerHTML = apoyos_data[apoyos_data.length - 1].apoyos.toLocaleString();
 
