@@ -1,53 +1,11 @@
-function state_data(nombre, apoyos, porcentaje)
-{
-    this.nombre = nombre;
-    this.apoyos = apoyos;
-    this.porcentaje = porcentaje;
-}
-
-var state_datas_fecha = "2017-12-11"
-var state_datas = [
-    new state_data("Aguascalientes", 1733, 19.05),
-    new state_data("Baja California", 1223, 4,64),
-    new state_data("Baja California Sur", 393, 7.85),
-    new state_data("Campeche", 210, 3,36),
-    new state_data("Coahuila", 728, 3.49),
-    new state_data("Colima", 1216, 23,49),
-    new state_data("Chiapas", 9861, 28.86),
-    new state_data("Chihuahua", 1175, 4.42),
-    new state_data("Ciudad de México", 19398, 25.98),
-    new state_data("Durango", 272, 2.18),
-    new state_data("Guanajuato", 2079, 4.89),
-    new state_data("Guerrero", 257, 1.05),
-    new state_data("Hidalgo", 817, 3.97),
-    new state_data("Jalisco", 11833, 20.50),
-    new state_data("México", 7269, 6.34),
-    new state_data("Michoacán", 1828, 5.48),
-    new state_data("Morelos", 1597, 11.34),
-    new state_data("Nayarit", 1182, 14.36),
-    new state_data("Nuevo León", 1211, 3.20),
-    new state_data("Oaxaca", 1315, 4.71),
-    new state_data("Puebla", 1662, 3.82),
-    new state_data("Querétaro", 2407, 15.79),
-    new state_data("Quintana Roo", 416, 3.59),
-    new state_data("San Luis Potosí", 1868, 9.73),
-    new state_data("Sinaloa", 2505, 12.04),
-    new state_data("Sonora", 403, 1.97),
-    new state_data("Tabasco", 139, 0.84),
-    new state_data("Tamaulipas", 352, 1.38),
-    new state_data("Tlaxcala", 686, 7.67),
-    new state_data("Veracruz", 2920, 5.18),
-    new state_data("Yucatán", 818, 5.47),
-    new state_data("Zacatecas", 4383, 38.63),
-];
-
+// map geometry data with dispersion data
 var i = 0;
 for (state of statesData.features) {
     // sanity check
-    if (state.properties["name"] == state_datas[i].nombre) {
-	state.properties["nombre"] = state_datas[i].nombre;
-	state.properties["apoyos"] = state_datas[i].apoyos;
-	state.properties["porcentaje"] = state_datas[i].porcentaje;
+    if (state.properties["name"] == dispersion[i].nombre) {
+	state.properties["nombre"] = dispersion[i].nombre;
+	state.properties["apoyos"] = dispersion[i].apoyos;
+	state.properties["porcentaje"] = dispersion[i].porcentaje;
     }
     i += 1;
 }
@@ -71,7 +29,7 @@ info.onAdd = function (map) {
 };
 
 info.update = function (props) {
-    this._div.innerHTML = '<h4>Apoyos por Estado al día ' + state_datas_fecha + '</h4>' +
+    this._div.innerHTML = '<h4>Apoyos por Estado al día ' + dispersion_fecha + '</h4>' +
 	(props ?
 	 '<b>' + props.nombre + '</b><br />' +
 	 props.apoyos + ' apoyos'+ '<br />' +
