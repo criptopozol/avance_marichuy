@@ -49,6 +49,7 @@ var datapoints = [
     new datapoint("2017-12-12", 95138, 1586),
     new datapoint("2017-12-13", 96846, 1708),
     new datapoint("2017-12-14", 98285, 1439),
+    new datapoint("2017-12-15", 99105, 820),
 ]
 
 document.getElementById("ultimaFecha").innerHTML = datapoints[datapoints.length - 1].fecha;
