@@ -1,10 +1,31 @@
-// calculate daily difference
+// calculate daily difference (skip first)
 for (var i = 1; i < apoyos_data.length; i++) {
     apoyos_data[i].incremento = apoyos_data[i].apoyos - apoyos_data[i-1].apoyos;
 }
 
+// calculate last week average
+var averageLastWeek = 0;
+for (var i = apoyos_data.length - 8; i < apoyos_data.length; i++) {
+    averageLastWeek += apoyos_data[i].incremento;
+}
+averageLastWeek /= 7.0;
+
+// calculate days left
+var oneDay = 24*60*60*1000;
+var lastDate = new Date(apoyos_data[apoyos_data.length - 1].fecha);
+var limitDate = new Date("2018-2-19");
+var daysLeft = Math.round(Math.abs((lastDate.getTime() - limitDate.getTime())/(oneDay)));
+
+// calculate required daily rate
+var required = 866593;
+var weHave = apoyos_data[apoyos_data.length - 1].apoyos;
+var requiredDaily = (required - weHave) / daysLeft;
+
 document.getElementById("ultimaFecha").innerHTML = apoyos_data[apoyos_data.length - 1].fecha;
 document.getElementById("apoyosTotales").innerHTML = apoyos_data[apoyos_data.length - 1].apoyos.toLocaleString();
+document.getElementById("promedioUltimaSemana").innerHTML = Math.round(averageLastWeek).toLocaleString();
+document.getElementById("diasRestantes").innerHTML = daysLeft;
+document.getElementById("requiredDaily").innerHTML = Math.round(requiredDaily).toLocaleString();
 
 var totalesCtx = document.getElementById("totalesChart");
 var totalesChart = new Chart(totalesCtx, {
