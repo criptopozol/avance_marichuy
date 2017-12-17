@@ -44,4 +44,5 @@ var apoyos_data = [
     {"fecha":"2017-12-14","apoyos":98285},
     {"fecha":"2017-12-15","apoyos":99105},
     {"fecha":"2017-12-16","apoyos":101008},
+    {"fecha":"2017-12-17","apoyos":102804},
 ];
