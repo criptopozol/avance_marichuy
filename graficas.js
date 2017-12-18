@@ -84,3 +84,40 @@ var diariosChart = new Chart(diariosCtx, {
         }
     }
 });
+
+var auxiliaresCtx = document.getElementById("auxiliaresChart");
+var auxiliaresChart = new Chart(auxiliaresCtx, {
+    type: 'bar',
+    data: {
+	labels: apoyos_data.map(function (elem) { return elem.fecha; }),
+	// colors: http://www.color-hex.com/color-palette/51394
+        datasets: [
+	    {
+		label: 'Auxiliares Registrados',
+		data: apoyos_data.map(function (elem) { return elem.auxiliares; }),
+		backgroundColor: 'rgba(45,81,154, 0.9)',
+		yAxisID: 'auxiliares'
+	    },
+	    {
+		label: 'Auxiliares Activos',
+		data: apoyos_data.map(function (elem) { return elem.auxiliares_activos; }),
+		backgroundColor: 'rgba(255,225,94, 0.9)',
+		yAxisID: 'auxiliares'
+	    }
+	]
+    },
+    options: {
+        scales: {
+            yAxes: [
+		{
+                    id: 'auxiliares',
+                    type: 'linear',
+		    ticks: {
+			beginAtZero: true
+		    },
+                    position: 'left'
+		}
+            ]
+        }
+    }
+});
