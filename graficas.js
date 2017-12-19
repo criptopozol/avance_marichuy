@@ -1,6 +1,8 @@
 // calculate daily difference (skip first)
 for (var i = 1; i < apoyos_data.length; i++) {
     apoyos_data[i].incremento = apoyos_data[i].apoyos - apoyos_data[i-1].apoyos;
+    apoyos_data[i].auxiliares_incremento = apoyos_data[i].auxiliares - apoyos_data[i-1].auxiliares;
+    apoyos_data[i].auxiliares_activos_incremento = apoyos_data[i].auxiliares_activos - apoyos_data[i-1].auxiliares_activos;
 }
 
 // calculate last week average
@@ -101,6 +103,43 @@ var auxiliaresChart = new Chart(auxiliaresCtx, {
 	    {
 		label: 'Auxiliares Activos',
 		data: apoyos_data.map(function (elem) { return elem.auxiliares_activos; }),
+		backgroundColor: 'rgba(255,225,94, 0.9)',
+		yAxisID: 'auxiliares'
+	    }
+	]
+    },
+    options: {
+        scales: {
+            yAxes: [
+		{
+                    id: 'auxiliares',
+                    type: 'linear',
+		    ticks: {
+			beginAtZero: true
+		    },
+                    position: 'left'
+		}
+            ]
+        }
+    }
+});
+
+var auxiliaresIncrementoCtx = document.getElementById("auxiliaresIncrementoChart");
+var auxiliaresIncrementoChart = new Chart(auxiliaresIncrementoCtx, {
+    type: 'bar',
+    data: {
+	labels: apoyos_data.map(function (elem) { return elem.fecha; }),
+	// colors: http://www.color-hex.com/color-palette/51394
+        datasets: [
+	    {
+		label: 'Nuevos Auxiliares Registrados por día',
+		data: apoyos_data.map(function (elem) { return elem.auxiliares_incremento; }),
+		backgroundColor: 'rgba(45,81,154, 0.9)',
+		yAxisID: 'auxiliares'
+	    },
+	    {
+		label: 'Nuevos Auxiliares Activos por díá',
+		data: apoyos_data.map(function (elem) { return elem.auxiliares_activos_incremento; }),
 		backgroundColor: 'rgba(255,225,94, 0.9)',
 		yAxisID: 'auxiliares'
 	    }
