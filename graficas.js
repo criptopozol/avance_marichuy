@@ -1,8 +1,12 @@
-// calculate daily difference (skip first)
-for (var i = 1; i < apoyos_data.length; i++) {
-    apoyos_data[i].incremento = apoyos_data[i].apoyos - apoyos_data[i-1].apoyos;
-    apoyos_data[i].auxiliares_incremento = apoyos_data[i].auxiliares - apoyos_data[i-1].auxiliares;
-    apoyos_data[i].auxiliares_activos_incremento = apoyos_data[i].auxiliares_activos - apoyos_data[i-1].auxiliares_activos;
+// calculate daily difference
+for (var i = 0; i < apoyos_data.length; i++) {
+    if (i > 0) { // skip first
+	apoyos_data[i].incremento = apoyos_data[i].apoyos - apoyos_data[i-1].apoyos;
+	apoyos_data[i].auxiliares_incremento = apoyos_data[i].auxiliares - apoyos_data[i-1].auxiliares;
+	apoyos_data[i].auxiliares_activos_incremento = apoyos_data[i].auxiliares_activos - apoyos_data[i-1].auxiliares_activos;
+    }
+    apoyos_data[i].auxiliares_activos_porcentaje = (apoyos_data[i].auxiliares_activos / apoyos_data[i].auxiliares) * 100;
+    apoyos_data[i].apoyos_por_auxiliar = apoyos_data[i].apoyos / apoyos_data[i].auxiliares_activos;
 }
 
 // calculate last week average
@@ -157,6 +161,64 @@ var auxiliaresIncrementoChart = new Chart(auxiliaresIncrementoCtx, {
                     position: 'left'
 		}
             ]
+        }
+    }
+});
+
+var auxiliaresActivosPorcentajeCtx = document.getElementById("auxiliaresActivosPorcentajeChart");
+var auxiliaresActivosPorcentajeChart = new Chart(auxiliaresActivosPorcentajeCtx, {
+    type: 'bar',
+    data: {
+	labels: apoyos_data.map(function (elem) { return elem.fecha; }),
+	// colors: http://www.color-hex.com/color-palette/51394
+        datasets: [
+	    {
+		label: 'Porcentaje de Auxiliares Activos',
+		data: apoyos_data.map(function (elem) { return elem.auxiliares_activos_porcentaje; }),
+		backgroundColor: 'rgba(45,81,154, 0.9)',
+		yAxisID: 'auxiliaresActivosPorcentaje'
+	    }
+	]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                id: 'auxiliaresActivosPorcentaje',
+                type: 'linear',
+		ticks: {
+		    beginAtZero: true
+		},
+                position: 'left'
+            }]
+        }
+    }
+});
+
+var apoyosPorAuxiliarCtx = document.getElementById("apoyosPorAuxiliarChart");
+var apoyosPorAuxiliarChart = new Chart(apoyosPorAuxiliarCtx, {
+    type: 'bar',
+    data: {
+	labels: apoyos_data.map(function (elem) { return elem.fecha; }),
+	// colors: http://www.color-hex.com/color-palette/51394
+        datasets: [
+	    {
+		label: 'Promedio de Apoyos por Auxiliar Activo',
+		data: apoyos_data.map(function (elem) { return elem.apoyos_por_auxiliar; }),
+		backgroundColor: 'rgba(45,81,154, 0.9)',
+		yAxisID: 'apoyosPorAuxiliar'
+	    }
+	]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                id: 'apoyosPorAuxiliar',
+                type: 'linear',
+		ticks: {
+		    beginAtZero: true
+		},
+                position: 'left'
+            }]
         }
     }
 });
