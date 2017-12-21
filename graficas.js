@@ -6,6 +6,7 @@ for (var i = 0; i < apoyos_data.length; i++) {
 	apoyos_data[i].auxiliares_activos_incremento = apoyos_data[i].auxiliares_activos - apoyos_data[i-1].auxiliares_activos;
     }
     apoyos_data[i].auxiliares_activos_porcentaje = (apoyos_data[i].auxiliares_activos / apoyos_data[i].auxiliares) * 100;
+    apoyos_data[i].porcentaje_validos = (apoyos_data[i].apoyos_validos / apoyos_data[i].apoyos) * 100;
     apoyos_data[i].apoyos_por_auxiliar = apoyos_data[i].apoyos / apoyos_data[i].auxiliares_activos;
 }
 
@@ -41,8 +42,14 @@ var totalesChart = new Chart(totalesCtx, {
 	// colors: http://www.color-hex.com/color-palette/51394
         datasets: [
 	    {
-		label: 'Apoyos totales',
+		label: 'Apoyos Totales',
 		data: apoyos_data.map(function (elem) { return elem.apoyos; }),
+		backgroundColor: 'rgba(45,81,154, 0.9)',
+		yAxisID: 'totales'
+            },
+	    {
+		label: 'Apoyos Válidos',
+		data: apoyos_data.map(function (elem) { return elem.apoyos_validos; }),
 		backgroundColor: 'rgba(255,225,94, 0.9)',
 		yAxisID: 'totales'
             },
@@ -81,6 +88,35 @@ var diariosChart = new Chart(diariosCtx, {
         scales: {
             yAxes: [{
                 id: 'diarios',
+                type: 'linear',
+		ticks: {
+		    beginAtZero: true
+		},
+                position: 'left'
+            }]
+        }
+    }
+});
+
+var validosCtx = document.getElementById("validosChart");
+var validosChart = new Chart(validosCtx, {
+    type: 'bar',
+    data: {
+	labels: apoyos_data.map(function (elem) { return elem.fecha; }),
+	// colors: http://www.color-hex.com/color-palette/51394
+        datasets: [
+	    {
+		label: 'Porcentaje de Apoyos Válidos',
+		data: apoyos_data.map(function (elem) { return elem.porcentaje_validos; }),
+		backgroundColor: 'rgba(45,81,154, 0.9)',
+		yAxisID: 'validos'
+            },
+	]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+		id: 'validos',
                 type: 'linear',
 		ticks: {
 		    beginAtZero: true
