@@ -2,6 +2,8 @@
 for (var i = 0; i < apoyos_data.length; i++) {
     if (i > 0) { // skip first
 	apoyos_data[i].incremento = apoyos_data[i].apoyos - apoyos_data[i-1].apoyos;
+	if (apoyos_data[i-1].apoyos_validos != 0) // skip first available value (it is veri big)
+	    apoyos_data[i].incremento_validos = apoyos_data[i].apoyos_validos - apoyos_data[i-1].apoyos_validos;
 	apoyos_data[i].auxiliares_incremento = apoyos_data[i].auxiliares - apoyos_data[i-1].auxiliares;
 	apoyos_data[i].auxiliares_activos_incremento = apoyos_data[i].auxiliares_activos - apoyos_data[i-1].auxiliares_activos;
     }
@@ -77,7 +79,7 @@ var diariosChart = new Chart(diariosCtx, {
 	// colors: http://www.color-hex.com/color-palette/51394
         datasets: [
 	    {
-		label: 'Apoyos diarios',
+		label: 'Apoyos Diarios',
 		data: apoyos_data.map(function (elem) { return elem.incremento; }),
 		backgroundColor: 'rgba(45,81,154, 0.9)',
 		yAxisID: 'diarios'
@@ -117,6 +119,35 @@ var validosChart = new Chart(validosCtx, {
         scales: {
             yAxes: [{
 		id: 'validos',
+                type: 'linear',
+		ticks: {
+		    beginAtZero: true
+		},
+                position: 'left'
+            }]
+        }
+    }
+});
+
+var diariosValidosCtx = document.getElementById("diariosValidosChart");
+var diariosValidosChart = new Chart(diariosValidosCtx, {
+    type: 'bar',
+    data: {
+	labels: apoyos_data.map(function (elem) { return elem.fecha; }),
+	// colors: http://www.color-hex.com/color-palette/51394
+        datasets: [
+	    {
+		label: 'Apoyos Válidos Diarios',
+		data: apoyos_data.map(function (elem) { return elem.incremento_validos; }),
+		backgroundColor: 'rgba(255,225,94, 0.9)',
+		yAxisID: 'diarios'
+	    }
+	]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                id: 'diarios',
                 type: 'linear',
 		ticks: {
 		    beginAtZero: true
