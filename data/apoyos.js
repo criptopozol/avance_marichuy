@@ -78,4 +78,5 @@ var apoyos_data = [
     {"fecha":"2018-01-18","apoyos":163928,"auxiliares":10638,"auxiliares_activos":4388,"apoyos_validos":153725},
     {"fecha":"2018-01-19","apoyos":166368,"auxiliares":10692,"auxiliares_activos":4433,"apoyos_validos":155895},
     {"fecha":"2018-01-20","apoyos":169016,"auxiliares":10737,"auxiliares_activos":4470,"apoyos_validos":156261},
+    {"fecha":"2018-01-21","apoyos":171599,"auxiliares":10780,"auxiliares_activos":4503,"apoyos_validos":159226},
 ];
