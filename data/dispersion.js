@@ -1,4 +1,4 @@
-var dispersion_fecha = "2018-01-15"
+var dispersion_fecha = "2018-01-22"
 var dispersion = [
     {"nombre":"Aguascalientes","apoyos":2583.0,"porcentaje":28.39},
     {"nombre":"Baja California","apoyos":2080.0,"porcentaje":7.89},
