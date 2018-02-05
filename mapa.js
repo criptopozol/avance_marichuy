@@ -41,16 +41,16 @@ info.update = function (props) {
 info.addTo(map);
 
 function getColor(d) {
-    return d >= 30 ? "#00441b":
-	d > 27 ? "#006d2c":
-	d > 24 ? "#238b45":
-	d > 21 ? "#41ab5d":
-	d > 18 ? "#74c476":
-	d > 15 ? "#a1d99b":
-	d > 12 ? "#c7e9c0":
-	d > 9 ? "#e5f5e0":
-	d > 6 ? "#f7fcf5":
-	d > 3 ? "#fffcf5":
+    return d >= 70 ? "#00441b":
+	d > 60 ? "#006d2c":
+	d > 50 ? "#238b45":
+	d > 40 ? "#41ab5d":
+	d > 30 ? "#74c476":
+	d > 20 ? "#a1d99b":
+	d > 15 ? "#c7e9c0":
+	d > 10 ? "#e5f5e0":
+	d > 5 ? "#f7fcf5":
+	d > 2 ? "#fffcf5":
 	"#ffffff";
 }
 
@@ -110,7 +110,7 @@ var legend = L.control({position: 'bottomleft'});
 
 legend.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'info legend'),
-	grades = [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30],
+	grades = [0, 2, 5, 10, 15, 20, 30, 40, 50, 60, 70],
 	labels = [],
 	from, to;
 
