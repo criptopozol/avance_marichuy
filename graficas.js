@@ -21,14 +21,18 @@ averageLastWeek /= 7.0;
 
 // calculate days left
 var oneDay = 24*60*60*1000;
-var lastDate = new Date(apoyos_data[apoyos_data.length - 1].fecha);
-var limitDate = new Date("2018-2-19");
-var daysLeft = Math.round(Math.abs((lastDate.getTime() - limitDate.getTime())/(oneDay)));
+var lastDate = new Date(apoyos_data[apoyos_data.length - 1].fecha + " GMT-0600");
+var limitDate = new Date("2018-02-14 23:59:59");
+var daysLeft = Math.ceil( (limitDate.getTime() - lastDate.getTime()) / oneDay);
 
 // calculate required daily rate
 var required = 866593;
 var weHave = apoyos_data[apoyos_data.length - 1].apoyos;
 var requiredDaily = (required - weHave) / daysLeft;
+if (daysLeft <= 0) {
+    daysLeft = 0;
+    requiredDaily = 0;
+}
 
 document.getElementById("ultimaFecha").innerHTML = apoyos_data[apoyos_data.length - 1].fecha;
 document.getElementById("apoyosTotales").innerHTML = apoyos_data[apoyos_data.length - 1].apoyos.toLocaleString();
