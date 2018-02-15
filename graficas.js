@@ -22,7 +22,7 @@ averageLastWeek /= 7.0;
 // calculate days left
 var oneDay = 24*60*60*1000;
 var lastDate = new Date(apoyos_data[apoyos_data.length - 1].fecha + " GMT-0600");
-var limitDate = new Date("2018-02-14 23:59:59");
+var limitDate = new Date("2018-02-19 23:59:59");
 var daysLeft = Math.ceil( (limitDate.getTime() - lastDate.getTime()) / oneDay);
 
 // calculate required daily rate
